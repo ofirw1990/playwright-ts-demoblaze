@@ -32,5 +32,4 @@ export default class HomePage extends BasePage {
         await this.page.waitForSelector('a.hrefch', { state: 'attached' });
         return await this.page.locator('.hrefch').allInnerTexts();
     }
-    
 }

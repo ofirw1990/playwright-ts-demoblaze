@@ -2,13 +2,6 @@ import { test, expect } from '@playwright/test';
 import HomePage from '../pages/HomePage';
 import Products from '../data/products.json';
 
-test('basic', async({page})=>{
-    await page.goto('https://www.demoblaze.com/index.html');
-    await page.waitForTimeout(1000);
-    await page.locator('text=Phones').click();
-    await page.waitForTimeout(9000);
-})
-
 test.describe('Product filter buttons', () => {
   const filterCategories = ['phones', 'laptops', 'monitors'];
 

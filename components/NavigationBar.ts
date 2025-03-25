@@ -7,31 +7,39 @@ export class NavigationBar {
     private aboutButton: Locator;
     private cartButton: Locator;
     private loginButton: Locator;
-    private logoutButton: Locator;
+    private signUpButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
-        this.homeButton = page.locator('#navbar-home');
-        this.contactButton = page.locator('#navbar-contact');
-        this.aboutButton = page.locator('#navbar-about');
-        this.cartButton = page.locator('#navbar-cart');
-        this.loginButton = page.locator('#login2');
-        this.logoutButton = page.locator('#logout2');
+        this.homeButton = this.page.locator("a[href='index.html']" , { hasText: "Home" });
+        this.contactButton = this.page.locator('text=Contact');
+        this.aboutButton = this.page.locator('text=About us');
+        this.cartButton = this.page.locator('id=cartur');
+        this.loginButton = this.page.locator("[id*='login']", { hasText: "Log in" });
+        this.signUpButton = this.page.locator("[id*='signin']", { hasText: "Sign up" });
     }
 
-    async goToHome() {
+    public async clickHomeButton() {
         await this.homeButton.click();
     }
 
-    async goToCart() {
+    public async clickContactButton() {
+        await this.contactButton.click();
+    }
+
+    public async clickAboutButton() {
+        await this.aboutButton.click();
+    }
+
+    public async clickCartButton() {
         await this.cartButton.click();
     }
 
-    async login() {
+    public async clickLogInButton() {
         await this.loginButton.click();
     }
 
-    async logout() {
-        await this.logoutButton.click();
+    public async clickSignUpButton() {
+        await this.signUpButton.click();
     }
 }
