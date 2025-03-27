@@ -15,8 +15,7 @@ test.describe('Product filter buttons', () => {
       await page.waitForFunction(
       (expectedCount) => document.querySelectorAll('.hrefch').length === expectedCount,
         Products[category].length
-);
-
+      );
 
       // Get the expected products for the category from the JSON file
       const expectedProducts = Products[category];
