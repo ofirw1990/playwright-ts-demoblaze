@@ -30,7 +30,5 @@ test.describe('NavigationBar buttons', () => {
         await homePage.openSignUpModal();
         await homePage.validateModalTitle();
         await homePage.closeModal();
-          
         });
 });
-

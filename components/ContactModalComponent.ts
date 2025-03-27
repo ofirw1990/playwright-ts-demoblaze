@@ -6,7 +6,19 @@ export class ContactModalComponent extends BaseModalComponenet {
     protected closeButtonSelector = "//h5[@id='exampleModalLabel']/../button";
     protected expectedTitle = "New message";
 
-    constructor(page: Page) {
+    private emailInputSelector = "#recipient-email";
+    private nameInputSelector = "#recipient-name"; 
+    private messageInputSelector = "#message-text";
+    private sendButtonSelector = "#exampleModal button.btn-primary"; 
+
+    public constructor(page: Page) {
         super(page);
     }
+    
+    public async fillDetailsAndSendMessage(name: string, email: string, message: string) {
+        await this.page.fill(this.emailInputSelector, email);
+        await this.page.fill(this.nameInputSelector, name);
+        await this.page.fill(this.messageInputSelector, message);
+        await this.page.click(this.sendButtonSelector);
+    } 
 }
