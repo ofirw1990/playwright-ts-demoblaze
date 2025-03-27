@@ -8,15 +8,29 @@ test.describe('NavigationBar buttons', () => {
         const homePage = new HomePage(page);
         await homePage.gotoHomePage();
         
-
         await homePage.navigateToCartPage();
         const cartPage = new CartPage(page);
-        await cartPage.validatePageUrl("https://www.demoblaze.com/cart.html");
+        await cartPage.validatePageUrl();
         
         await cartPage.navigateToHomePage();
-        await homePage.validatePageUrl("https://www.demoblaze.com/index.html");
-        
-    });
+        await homePage.validatePageUrl();
 
+        await homePage.openContactModal();
+        await homePage.validateModalTitle();
+        await homePage.closeModal();
+
+        await homePage.openAboutModal();
+        await homePage.validateModalTitle();
+        await homePage.closeModal();
+
+        await homePage.openLoginModal();
+        await homePage.validateModalTitle();
+        await homePage.closeModal();
+
+        await homePage.openSignUpModal();
+        await homePage.validateModalTitle();
+        await homePage.closeModal();
+          
+        });
 });
 

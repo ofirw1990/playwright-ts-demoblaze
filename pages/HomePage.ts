@@ -6,16 +6,17 @@ export default class HomePage extends BasePage {
     private filterPhones: Locator;
     private filterLaptops: Locator;
     private filterMonitors: Locator;
+    protected expectedUrl = "https://www.demoblaze.com/index.html";
 
     constructor(page: Page) {
-        super(page,"https://www.demoblaze.com/index.html");
+        super(page);
         this.filterPhones = this.page.locator('text=Phones');
         this.filterLaptops = this.page.locator('text=Laptops');
         this.filterMonitors = this.page.locator('text=Monitors');
     }
 
     public async gotoHomePage() {
-        await this.navigateTo(this.url);
+        await this.navigateTo(this.expectedUrl);
     }
 
     public async selectCategoryFilter(category: string) {

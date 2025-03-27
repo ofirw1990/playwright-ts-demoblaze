@@ -12,8 +12,8 @@ export class NavigationBar {
     constructor(page: Page) {
         this.page = page;
         this.homeButton = this.page.locator("a[href='index.html']" , { hasText: "Home" });
-        this.contactButton = this.page.locator('text=Contact');
-        this.aboutButton = this.page.locator('text=About us');
+        this.contactButton = this.page.locator('a:text("Contact")');
+        this.aboutButton = this.page.locator('a.nav-link[data-target="#videoModal"]');
         this.cartButton = this.page.locator('id=cartur');
         this.loginButton = this.page.locator("[id*='login']", { hasText: "Log in" });
         this.signUpButton = this.page.locator("[id*='signin']", { hasText: "Sign up" });
