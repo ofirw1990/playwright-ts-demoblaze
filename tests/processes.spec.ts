@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import { ContactModalComponent } from "../components/ContactModalComponent";
 import CartPage from "../pages/CartPage";
 import ProductPage from "../pages/ProductPage";
+import { UserDetails } from "../interfaces/UserDetails";
 
 test.describe("Sending message process", () => {
     test("Sending message with valid details", async ({ page }) => {
@@ -27,6 +28,14 @@ test.describe("Sending message process", () => {
 
 test.describe("Making an order process", () => {
     test("Adding products to the cart and paying for them", async ({ page }) => {
+        const user: UserDetails = {
+            name: "Ofir",
+            country: "Israel",
+            city: "Jerusalem",
+            creditCard: "1234567812345678",
+            month: "12",
+            year: "2025"
+        };
         const homePage = new HomePage(page);
         await homePage.gotoHomePage();
 
@@ -46,6 +55,10 @@ test.describe("Making an order process", () => {
         await productPage.navigateToCartPage();
         const cartPage = new CartPage(page);
         await cartPage.validatePageUrl();
-        await cartPage.validateProductDetails(productName,productPrice);
+        await cartPage.validateProductDetails(productName, productPrice);
+        await cartPage.clickPlaceOrderButton();
+        await cartPage.fillDetails(user);
+        await cartPage.clickPurchaseButton();
+        await cartPage.validatePurchaseDetails(productPrice, user.creditCard, user.name);
     });
 });
