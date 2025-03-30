@@ -6,7 +6,8 @@ export default class ProductPage extends BasePage {
     private productNameLocator: Locator;
     private productPriceLocator: Locator;
     private addToCartButton: Locator;
-    protected expectedUrl = "https://www.demoblaze.com/index.html";
+    protected expectedUrl: string;
+
 
     constructor(page: Page) {
         super(page);
@@ -20,8 +21,11 @@ export default class ProductPage extends BasePage {
     }
 
     public async getProductPrice(): Promise<string> {
-        return await this.productPriceLocator.innerText();
+        let allPriceDetails = await this.productPriceLocator.innerText();
+        let onlyNumbers = allPriceDetails.replace(/\D/g, ""); // שומר רק על מספרים
+        return onlyNumbers;
     }
+    
 
     public async addToCart(): Promise<void> {
         await this.addToCartButton.click();

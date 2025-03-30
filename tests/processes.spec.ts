@@ -27,11 +27,6 @@ test.describe("Sending message process", () => {
 
 test.describe("Making an order process", () => {
     test("Adding products to the cart and paying for them", async ({ page }) => {
-        page.on("dialog", async (dialog) => {
-            await page.waitForTimeout(2000);
-            await dialog.dismiss();
-        });
-
         const homePage = new HomePage(page);
         await homePage.gotoHomePage();
 
@@ -39,6 +34,18 @@ test.describe("Making an order process", () => {
         const productPage = new ProductPage(page);
         let productName = await productPage.getProductName();
         let productPrice = await productPage.getProductPrice();
+
+        const dialogPromise = page.waitForEvent("dialog");
+
         await productPage.addToCart();
+
+        const dialog = await dialogPromise;
+        expect(dialog.message()).toContain("Product added");
+        await dialog.accept();
+
+        await productPage.navigateToCartPage();
+        const cartPage = new CartPage(page);
+        await cartPage.validatePageUrl();
+        await cartPage.validateProductDetails(productName,productPrice);
     });
 });
